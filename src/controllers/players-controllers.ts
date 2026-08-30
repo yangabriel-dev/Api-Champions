@@ -3,7 +3,7 @@ import { getPlayerService } from "../services/players-service";
 import { ok } from "../utilidades/http-helper";
 
 export const getPlayer = async (req: Request, res: Response) => {
-    const data = await getPlayerService();
-    const response = await ok(data);
-    res.status(response.statusCode).json(response.body);
-    }
+    const HttpResponse = await getPlayerService();
+    
+    res.status(HttpResponse.statusCode).json(HttpResponse.body);
+};
