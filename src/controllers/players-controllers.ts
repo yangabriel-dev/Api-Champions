@@ -12,3 +12,8 @@ export const getPlayerById = async (req: Request, res: Response) => {
     const httpResponse = await service.getPLayerByIdService(id);
     res.status(httpResponse.statusCode).json(httpResponse.body);
 }
+
+export const postPlayer = async(req: Request, res: Response) => {
+    const bodyValue = req.body;
+    console.log(bodyValue);
+}   
