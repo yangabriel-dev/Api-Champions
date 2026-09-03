@@ -315,3 +315,7 @@ export const findAllPlayers = async (): Promise<PlayerMoldel[]> => {
 export const findPlayerById = async (id: number): Promise<PlayerMoldel | undefined> => {
     return database.find((player) => player.id === id);
 };
+
+export const insertPlayer = async (player: PlayerMoldel) => {
+  database.push(player);
+};
