@@ -44,6 +44,12 @@ export const creatPlayerService = async (player: PlayerMoldel)=>{
 
 export const deletePlayerService = async (id: number) => {
     let response = null;
+    const isDeleted = await PlayerRepository.deleteOnePlayer(id);
+    if(isDeleted){
+        response = await HttpResponse.ok({message: "deleted"});
+    }else{
+        response = await HttpResponse.badRequest();
+    }
     await PlayerRepository.deleteOnePlayer(id);
     response = await HttpResponse.ok({message: "deleted"})
     return response;
