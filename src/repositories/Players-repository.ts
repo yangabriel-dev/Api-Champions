@@ -333,8 +333,9 @@ export const deleteOnePlayer = async (id: number) => {
 
 export const findAndModifyPlayer = async (id: number, statistics: statisticsModel) => {
   const playerIndex = database.findIndex( player => player.id === id)
-  if (playerIndex !== -1){
-    database[playerIndex].statistics = statistics;
+  if (playerIndex === -1){
+    return undefined;
   }
+  database[playerIndex].statistics = statistics;
   return database[playerIndex];
 };

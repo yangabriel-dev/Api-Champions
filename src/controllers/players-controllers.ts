@@ -1,4 +1,4 @@
-import { request, Request, Response } from "express";
+import { Request, Response } from "express";
 import * as service from "../services/players-service";
 import { noContent } from "../utilidades/http-helper";
 import { statisticsModel } from "../models/statistics-models";
@@ -10,7 +10,7 @@ export const getPlayer = async (req: Request, res: Response) => {
 };
 
 export const getPlayerById = async (req: Request, res: Response) => {
-    const id = parseInt(req.params.id as string, 19);
+    const id = Number(req.params.id);
     const httpResponse = await service.getPLayerByIdService(id);
     res.status(httpResponse.statusCode).json(httpResponse.body);
 }
