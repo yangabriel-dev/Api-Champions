@@ -1,4 +1,3 @@
-import { isExportKeyword } from "typescript/unstable/ast";
 import { HttpResponse } from "../models/http-reponse-model";
 
 
@@ -13,7 +12,7 @@ export const created = async(): Promise<HttpResponse> =>{
     return {
         statusCode: 201,
         body: {
-            message:"Seccessful",
+            message:"Successful",
         },
     };
 };
@@ -30,5 +29,14 @@ export const badRequest = async(): Promise<HttpResponse> =>{
     return {
         statusCode: 400,
         body: null,
+    };
+};
+
+export const notFound = async(): Promise<HttpResponse> =>{
+    return {
+        statusCode: 404,
+        body: {
+            message: "Not found",
+        },
     };
 };

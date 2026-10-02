@@ -22,9 +22,9 @@ export const getPLayerByIdService = async (id: number) => {
     let response = null;
     
     if(data){
-        response = HttpResponse.ok(data);
+        response = await HttpResponse.ok(data);
     }else{
-        response = HttpResponse.noContent();
+        response = await HttpResponse.notFound();
     }
 
     return response;
@@ -33,7 +33,7 @@ export const getPLayerByIdService = async (id: number) => {
 export const creatPlayerService = async (player: PlayerMoldel)=>{
     let response = null;
     //verifica se está vazio
-    if (player){       
+    if (player && Object.keys(player).length > 0){
         await PlayerRepository.insertPlayer(player);
         response = await HttpResponse.created();
     } else {
@@ -48,15 +48,19 @@ export const deletePlayerService = async (id: number) => {
     if(isDeleted){
         response = await HttpResponse.ok({message: "deleted"});
     }else{
-        response = await HttpResponse.badRequest();
+        response = await HttpResponse.notFound();
     }
-    await PlayerRepository.deleteOnePlayer(id);
-    response = await HttpResponse.ok({message: "deleted"})
     return response;
 };
 
 export const updatePlayerService = async (id: number, statistics: statisticsModel) => {
     const data = await PlayerRepository.findAndModifyPlayer(id, statistics);
-    const response = await HttpResponse.ok(data);
+    let response = null;
+
+    if(data){
+        response = await HttpResponse.ok(data);
+    }else{
+        response = await HttpResponse.notFound();
+    }
     return response;
 };
